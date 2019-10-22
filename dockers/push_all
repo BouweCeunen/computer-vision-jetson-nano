@@ -1,0 +1,39 @@
+cd l4t
+docker build . -t bouwe/jetson-nano-l4t:latest
+docker push bouwe/jetson-nano-l4t:latest
+cd ..
+
+cd cuda
+docker build . -t bouwe/jetson-nano-l4t-cuda:latest
+docker push bouwe/jetson-nano-l4t-cuda:latest
+cd ..
+
+cd cudnn
+docker build . -t bouwe/jetson-nano-l4t-cuda-cudnn:latest
+docker push bouwe/jetson-nano-l4t-cuda-cudnn:latest
+cd ..
+
+cd nvinfer
+docker build . -t bouwe/jetson-nano-l4t-cuda-cudnn-nvinfer:latest
+docker push bouwe/jetson-nano-l4t-cuda-cudnn-nvinfer:latest
+cd ..
+
+cd tensorrt
+docker build . -t bouwe/jetson-nano-l4t-cuda-cudnn-nvinfer-tensorrt:latest
+docker push bouwe/jetson-nano-l4t-cuda-cudnn-nvinfer-tensorrt:latest
+cd ..
+
+cd opencv
+docker build . -t bouwe/jetson-nano-l4t-cuda-cudnn-nvinfer-tensorrt-opencv:latest
+docker push bouwe/jetson-nano-l4t-cuda-cudnn-nvinfer-tensorrt-opencv:latest
+cd ..
+
+cd detectnet
+docker build . -t bouwe/jetson-nano-l4t-cuda-cudnn-nvinfer-tensorrt-opencv-detectnet:latest
+docker push bouwe/jetson-nano-l4t-cuda-cudnn-nvinfer-tensorrt-opencv-detectnet:latest
+cd ..
+
+cd vision
+docker build . -t bouwe/jetson-nano-vision:latest
+docker push bouwe/jetson-nano-vision:latest
+cd ..

@@ -1,0 +1,7 @@
+version: '2.1'
+services:
+  main:
+    build: ./dockers/vision/
+    privileged: true
+    ports:
+      - "80:80"
