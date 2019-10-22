@@ -17,4 +17,4 @@ RUN pip3 install flask imutils uwsgi
 
 RUN chmod +x start.sh
 
-ENTRYPOINT ["./start.sh"]
+ENTRYPOINT ["/bin/bash"]
