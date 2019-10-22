@@ -11,8 +11,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY vision/nginx.conf /etc/nginx/sites-enabled/nginx.conf
-COPY vision/uwsgi.ini /etc/uwsgi/apps-enabled/uwsgi.ini
+COPY vision/nginx.conf /etc/nginx/sites-available/default
+COPY vision/uwsgi.ini /usr/share/uwsgi/conf/default.ini
 
 RUN pip3 install flask imutils
 
