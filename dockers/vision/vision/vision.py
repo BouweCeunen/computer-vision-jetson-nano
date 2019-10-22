@@ -66,7 +66,7 @@ def object_detections(objects, json):
 
 def run():
   global outputFrame
-
+  
   fps = 0
   while True:
     start_time = time.time()
@@ -97,3 +97,5 @@ def run():
       fps = round(1.0 / (time.time() - start_time), 2)
 
   camera.Close()
+
+run()

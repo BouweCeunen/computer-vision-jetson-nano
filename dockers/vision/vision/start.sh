@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ "$ENABLE_FLASK" == "true" ]; then
   service nginx start
-  uwsgi --ini uwsgi.ini
+  service uwsgi start
 fi
 python3 vision.py
