@@ -7,14 +7,14 @@ ENV FLASK_ENV=development
 COPY vision/ .
 
 RUN apt-get update && \
-    apt-get install -y nginx && \
+    apt-get install -y nginx uwsgi && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 COPY vision/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 COPY vision/uwsgi.ini /etc/uwsgi/apps-enabled/uwsgi.ini
 
-RUN pip3 install flask imutils uwsgi
+RUN pip3 install flask imutils
 
 RUN chmod +x start.sh
 
