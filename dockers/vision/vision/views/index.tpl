@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="body.css">
   </head>
   <body>
-    <img src="{{ url_for('feed') }}">
+    <a> {{ feed }} </a>
+    <img src="{{ feed }}">
   </body>
 </html>

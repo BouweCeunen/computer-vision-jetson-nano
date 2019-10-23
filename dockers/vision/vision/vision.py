@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import server
 import jetson.inference
 import jetson.utils
 import sys
@@ -44,9 +45,6 @@ sys.argv.append('--network=ssd-mobilenet-v2')
 
 mobilenet = jetson.inference.detectNet('ssd-mobilenet-v2', sys.argv)
 camera = jetson.utils.gstCamera(CAMERA_WIDTH, CAMERA_HEIGHT, CAMERA)
-camera.Open()
-
-outputFrame = None
 
 with open('coco-labels', 'r') as fp:
   classes = [line.rstrip('\n') for line in fp.readlines()]
@@ -65,11 +63,10 @@ def object_detections(objects, json):
   return json
 
 def run():
-  global outputFrame
-  
   fps = 0
   while True:
     start_time = time.time()
+    camera.Open()
 
     # get camera frame
     if (ENABLE_FLASK):
@@ -93,10 +90,15 @@ def run():
     if (ENABLE_FLASK):
       numpy_img = jetson.utils.cudaToNumpy(img, CAMERA_WIDTH, CAMERA_HEIGHT, 4)
       cv2.putText(numpy_img, str(fps) + ' fps', (20, 40), cv2.FONT_HERSHEY_DUPLEX, 1, (209, 80, 0, 255), 3)
-      outputFrame = numpy_img
+      with server.lock:
+        server.outputFrame = numpy_img
       fps = round(1.0 / (time.time() - start_time), 2)
 
   camera.Close()
 
-if __name__ == "__main__":
-  run()
+if (ENABLE_FLASK):
+  t = threading.Thread(target=server.serve, args=())
+  t.daemon = True
+  t.start()
+
+run()

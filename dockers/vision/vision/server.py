@@ -1,36 +1,37 @@
-#!/usr/bin/python3
-
-from flask import Response, Flask, render_template, send_from_directory
+from bottle import template, static_file, response, Bottle
 import threading
 import imutils
 import time
 import cv2
-import uwsgidecorators
-import vision
 
-app = Flask(__name__)
+outputFrame = None
+lock = threading.Lock()
+app = Bottle()
 
 @app.route("/")
 def index():
-  return render_template('index.html')
+  return template('index', feed=app.get_url('/feed'))
 
 @app.route("/body.css")
 def body():
-  return send_from_directory('templates', 'body.css')
+  return static_file('body.css', root='./views/')
 
 @app.route("/feed")
 def feed():
-  return Response(generate(), mimetype = "multipart/x-mixed-replace; boundary=frame")
+  response.content_type = "multipart/x-mixed-replace; boundary=frame"
+  return generate()
 
 def generate():
-  if vision.outputFrame is None:
-    yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + b'\r\n')
-  (flag, encodedImage) = cv2.imencode(".jpg", cv2.cvtColor(vision.outputFrame, cv2.COLOR_BGR2RGB))
-  if not flag:
-    yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + b'\r\n')
-  yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
+  global outputFrame, lock
 
-@uwsgidecorators.postfork
-@uwsgidecorators.thread
-def run():
-  vision.run()
+  while True:
+    with lock:
+      if outputFrame is None:
+        continue
+      (flag, encodedImage) = cv2.imencode(".jpg", cv2.cvtColor(outputFrame, cv2.COLOR_BGR2RGB))
+      if not flag:
+        continue
+    yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
+
+def serve():
+  app.run(host='0.0.0.0', port='80', debug=False, threaded=True, use_reloader=False)
