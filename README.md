@@ -3,7 +3,7 @@ Object detection with ssd_mobilenet_v2_coco model optimized with TensorRT on NVI
 
 [![DockerHub Badge](https://dockeri.co/image/bouwe/jetson-nano-vision)](https://hub.docker.com/r/bouwe/jetson-nano-vision)
 
-All docker files rely on standard deb/zip/tbz2 files which include all necessary libraries like CUDA, CUDNN, TensorRT etc. It is possible to download these directly from the nvidia developer console. I'm using a Logitech C920 HD Pro webcam attached to my Jetson Nano for doing object detection with. I've used the Jetson Inference of dusty-nv (https://github.com/dusty-nv/jetson-inference) to make this work. The pretrained ssd_mobilenet_v2_coco model optimized for TensorRT is used. It will automatically serve the images with Flask (http://flask.pocoo.org/) on port 80 of your Jetson Nano which can then be viewed by going to the ip of that device. Resolution of the webcam is set to 1024x720. I'd advise to look at NVIDIA DeepStream for more performant detection.
+All docker files rely on standard deb/zip/tbz2 files which include all necessary libraries like CUDA, CUDNN, TensorRT etc. It is possible to download these directly from the nvidia developer console. I'm using a Logitech C920 HD Pro webcam attached to my Jetson Nano for doing object detection with. I've used the Jetson Inference of dusty-nv (https://github.com/dusty-nv/jetson-inference) to make this work. The pretrained ssd_mobilenet_v2_coco model optimized for TensorRT is used. It will automatically serve the images with Bottle (https://github.com/bottlepy/bottle) on port 80 of your Jetson Nano which can then be viewed by going to the ip of that device. Resolution of the webcam is set to 1024x720. I'd advise to look at NVIDIA DeepStream for more performant detection.
 
 [![jetson-nano](./images/detection.gif)](./images/detection.gif)
 
@@ -33,7 +33,7 @@ It is possible to set environment variables within your Docker environment.
 * CAMERA (which camera source to use, default '/dev/video0')
 * CONFIDENCE_TRESHOLD (confidence of detection, default 0.5)
 * ALPHA_OVERLAY (alpha value of the image overlay of the detection, default 120)
-* ENABLE_FLASK (enable Flask webserver, default True)
+* ENABLE_BOTTLE (enable Bottle webserver, default true)
 
 ## Deploy with Balena
 Clone this repository, ceate an application on Balena Cloud (https://www.balena.io/cloud/) and flash Balena OS on an sd-card and put it in the Jetson Nano. It's now possible to link a git repository with Balena. Balena will use the docker-compose.yml file in the root of the directory to build and deploy the container.

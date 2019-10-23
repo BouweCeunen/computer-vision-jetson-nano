@@ -35,9 +35,9 @@ try:
 except KeyError:
     ALPHA_OVERLAY = 120
 try:
-    ENABLE_FLASK = str(os.environ['ENABLE_FLASK']).lower() == 'true'
+    ENABLE_BOTTLE = str(os.environ['ENABLE_BOTTLE']).lower() == 'true'
 except KeyError:
-    ENABLE_FLASK = True
+    ENABLE_BOTTLE = True
 
 sys.argv.append('--threshold=' + str(CONFIDENCE_TRESHOLD))
 sys.argv.append('--alpha=' + str(ALPHA_OVERLAY))
@@ -69,13 +69,13 @@ def run():
     camera.Open()
 
     # get camera frame
-    if (ENABLE_FLASK):
+    if (ENABLE_BOTTLE):
       img, width, height = camera.CaptureRGBA(zeroCopy=1)
     else:
       img, width, height = camera.CaptureRGBA(zeroCopy=0)
 
     # detect objects
-    if (ENABLE_FLASK):
+    if (ENABLE_BOTTLE):
       objects = mobilenet.Detect(img, width, height, IMAGE_OVERLAY)
     else:
       objects = mobilenet.Detect(img, width, height, 'none')
@@ -87,7 +87,7 @@ def run():
     print(json)
 
     # serve images
-    if (ENABLE_FLASK):
+    if (ENABLE_BOTTLE):
       numpy_img = jetson.utils.cudaToNumpy(img, CAMERA_WIDTH, CAMERA_HEIGHT, 4)
       cv2.putText(numpy_img, str(fps) + ' fps', (20, 40), cv2.FONT_HERSHEY_DUPLEX, 1, (209, 80, 0, 255), 3)
       with server.lock:
@@ -96,7 +96,7 @@ def run():
 
   camera.Close()
 
-if (ENABLE_FLASK):
+if (ENABLE_BOTTLE):
   t = threading.Thread(target=server.serve, args=())
   t.daemon = True
   t.start()
