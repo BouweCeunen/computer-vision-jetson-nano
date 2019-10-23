@@ -8,4 +8,4 @@ RUN pip3 install bottle imutils
 
 RUN chmod +x vision.py
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["./vision.py"]
