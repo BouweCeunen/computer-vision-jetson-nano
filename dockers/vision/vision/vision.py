@@ -101,4 +101,6 @@ if (ENABLE_BOTTLE):
   t.daemon = True
   t.start()
 
-run()
+tt = threading.Thread(target=run, args=())
+tt.daemon = True
+tt.start()
