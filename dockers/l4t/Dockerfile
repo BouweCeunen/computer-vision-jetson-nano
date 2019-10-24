@@ -14,9 +14,8 @@ RUN apt-get update && \
     rm -rf ./Linux_for_Tegra && \
     rm ./${DRIVER_PACK} && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN pip3 install jetson-stats
+    rm -rf /var/lib/apt/lists/* && \
+    pip3 install jetson-stats
     
 ENV LD_LIBRARY_PATH=/usr/lib/aarch64-linux-gnu/tegra:/usr/lib/aarch64-linux-gnu/tegra-egl:${LD_LIBRARY_PATH}
 
