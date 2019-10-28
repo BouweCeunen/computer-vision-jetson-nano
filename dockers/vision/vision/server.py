@@ -34,4 +34,4 @@ def generate():
     yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
 
 def serve():
-  app.run(host='0.0.0.0', port='80', server='bjoern')
+  app.run(host='0.0.0.0', port='80', server='cherrypy')
