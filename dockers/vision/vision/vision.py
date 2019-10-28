@@ -38,6 +38,10 @@ try:
     ENABLE_BOTTLE = str(os.environ['ENABLE_BOTTLE']).lower() == 'true'
 except KeyError:
     ENABLE_BOTTLE = True
+try:
+    ENABLE_LOGGING = str(os.environ['ENABLE_LOGGING']).lower() == 'true'
+except KeyError:
+    ENABLE_LOGGING = False
 
 sys.argv.append('--threshold=' + str(CONFIDENCE_TRESHOLD))
 sys.argv.append('--alpha=' + str(ALPHA_OVERLAY))
@@ -81,10 +85,11 @@ def run():
       objects = mobilenet.Detect(img, width, height, 'none')
 
     # json detections
-    json = {}
-    json['datetime'] = str(datetime.datetime.now())
-    json = object_detections(objects, json)
-    print(json)
+    if (ENABLE_LOGGING):
+      json = {}
+      json['datetime'] = str(datetime.datetime.now())
+      json = object_detections(objects, json)
+      print(json)
 
     # serve images
     if (ENABLE_BOTTLE):
