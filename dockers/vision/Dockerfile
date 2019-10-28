@@ -4,7 +4,7 @@ WORKDIR /app/vision
 
 COPY vision/ .
 
-RUN pip3 install bottle imutils cherrypy
+RUN pip3 install bottle imutils waitress
 
 RUN chmod +x vision.py
 
