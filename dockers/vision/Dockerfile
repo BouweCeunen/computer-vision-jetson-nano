@@ -4,7 +4,7 @@ WORKDIR /app/vision
 
 COPY vision/ .
 
-RUN pip3 install bottle imutils
+RUN pip3 install bottle imutils paste
 
 RUN chmod +x vision.py
 
