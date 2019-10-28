@@ -97,8 +97,9 @@ def run():
   camera.Close()
 
 if (ENABLE_BOTTLE):
-  t = threading.Thread(target=server.serve, args=())
+  t = threading.Thread(target=run, args=())
   t.daemon = True
   t.start()
-
-run()
+  server.serve()
+else:
+  run()
