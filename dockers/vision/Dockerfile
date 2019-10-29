@@ -3,7 +3,7 @@ FROM bouwe/jetson-nano-l4t-cuda-cudnn-nvinfer-tensorrt-opencv-detectnet:latest
 WORKDIR /app/vision
 
 ENV SWAPFILE /var/lib/swap.img
-ENV SWAPSIZE 4096
+ENV SWAPSIZE 512
 
 COPY vision/ .
 
