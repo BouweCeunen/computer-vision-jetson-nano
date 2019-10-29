@@ -9,7 +9,7 @@ COPY vision/ .
 
 RUN pip3 install bottle imutils waitress
 
-RUN mkdir -p $SWAPFILE && \
+RUN mkdir -p $(dirname $SWAPFILE) && \
     dd if=/dev/zero of=$SWAPFILE bs=1024k count=$SWAPSIZE && \
     mkswap $SWAPFILE && \
     chmod 0600 $SWAPFILE && \
