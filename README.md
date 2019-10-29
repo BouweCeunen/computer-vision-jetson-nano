@@ -21,7 +21,7 @@ docker run --privileged -it bouwe/jetson-nano-vision:latest
 It is possible to run jtop (https://github.com/rbonghi/jetson_stats) in the container if you change the entrypoint to systemd.
 
 ```bash
-docker run --privileged --entrypoint=/bin/systemd -it bouwe/jetson-nano-vision:latest
+docker run --privileged --entrypoint /bin/systemd -it bouwe/jetson-nano-vision:latest
 ```
 
 ## Environment variables
