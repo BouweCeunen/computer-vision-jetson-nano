@@ -70,34 +70,33 @@ def run():
   fps = 0
   while True:
     start_time = time.time()
-    print(start_time)
-    time.sleep(1)
-    # # get camera frame
-    # if (ENABLE_BOTTLE):
-    #   img, width, height = camera.CaptureRGBA(zeroCopy=1)
-    # else:
-    #   img, width, height = camera.CaptureRGBA(zeroCopy=0)
 
-    # # detect objects
-    # if (ENABLE_BOTTLE):
-    #   objects = mobilenet.Detect(img, width, height, IMAGE_OVERLAY)
-    # else:
-    #   objects = mobilenet.Detect(img, width, height, 'none')
+    # get camera frame
+    if (ENABLE_BOTTLE):
+      img, width, height = camera.CaptureRGBA(zeroCopy=1)
+    else:
+      img, width, height = camera.CaptureRGBA(zeroCopy=0)
 
-    # # json detections
-    # if (ENABLE_LOGGING):
-    #   json = {}
-    #   json['datetime'] = str(datetime.datetime.now())
-    #   json = object_detections(objects, json)
-    #   print(json)
+    # detect objects
+    if (ENABLE_BOTTLE):
+      objects = mobilenet.Detect(img, width, height, IMAGE_OVERLAY)
+    else:
+      objects = mobilenet.Detect(img, width, height, 'none')
 
-    # # serve images
-    # if (ENABLE_BOTTLE):
-    #   numpy_img = jetson.utils.cudaToNumpy(img, CAMERA_WIDTH, CAMERA_HEIGHT, 4)
-    #   cv2.putText(numpy_img, str(fps) + ' fps', (20, 40), cv2.FONT_HERSHEY_DUPLEX, 1, (209, 80, 0, 255), 3)
-    #   with server.lock:
-    #     server.outputFrame = numpy_img
-    #   fps = round(1.0 / (time.time() - start_time), 2)
+    # json detections
+    if (ENABLE_LOGGING):
+      json = {}
+      json['datetime'] = str(datetime.datetime.now())
+      json = object_detections(objects, json)
+      print(json)
+
+    # serve images
+    if (ENABLE_BOTTLE):
+      numpy_img = jetson.utils.cudaToNumpy(img, CAMERA_WIDTH, CAMERA_HEIGHT, 4)
+      cv2.putText(numpy_img, str(fps) + ' fps', (20, 40), cv2.FONT_HERSHEY_DUPLEX, 1, (209, 80, 0, 255), 3)
+      with server.lock:
+        server.outputFrame = numpy_img
+      fps = round(1.0 / (time.time() - start_time), 2)
 
   camera.Close()
 

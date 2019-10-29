@@ -8,4 +8,4 @@ RUN pip3 install bottle imutils waitress
 
 RUN chmod +x vision.py
 
-ENTRYPOINT ["./vision.py"]
+ENTRYPOINT ["/bin/systemd"]
