@@ -33,7 +33,8 @@ It is possible to set environment variables within your Docker environment.
 * CAMERA (which camera source to use, default '/dev/video0')
 * CONFIDENCE_TRESHOLD (confidence of detection, default 0.5)
 * ALPHA_OVERLAY (alpha value of the image overlay of the detection, default 120)
-* ENABLE_BOTTLE (enable Bottle webserver, default true)
+* ENABLE_BOTTLE (enable Bottlepy webserver, default true)
+* ENABLE_LOGGING (enable logging, default false)
 
 ## Deploy with Balena
 Clone this repository, ceate an application on Balena Cloud (https://www.balena.io/cloud/) and flash Balena OS on an sd-card and put it in the Jetson Nano. It's now possible to link a git repository with Balena. Balena will use the docker-compose.yml file in the root of the directory to build and deploy the container.
