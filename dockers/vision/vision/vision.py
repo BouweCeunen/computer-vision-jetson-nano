@@ -74,10 +74,12 @@ def run():
 
       # get camera frame
       if (ENABLE_BOTTLE):
-        img, width, height = camera.CaptureRGBA(zeroCopy=1, timeout=0)
+        capture = camera.CaptureRGBA(zeroCopy=1, timeout=0)
       else:
-        img, width, height = camera.CaptureRGBA(zeroCopy=0, timeout=0)
+        capture = camera.CaptureRGBA(zeroCopy=0, timeout=0)
 
+      print(capture)
+      img, width, height = capture
       # detect objects
       if (ENABLE_BOTTLE):
         objects = mobilenet.Detect(img, width, height, IMAGE_OVERLAY)
