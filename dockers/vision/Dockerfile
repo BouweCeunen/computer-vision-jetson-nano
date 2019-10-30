@@ -9,6 +9,6 @@ COPY vision/ .
 
 RUN pip3 install bottle imutils waitress
 
-RUN chmod +x start.sh
+RUN chmod +x vision.py
 
-ENTRYPOINT ["./start.sh"]
+ENTRYPOINT ["./vision.py"]
