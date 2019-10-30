@@ -74,9 +74,9 @@ def run():
 
       # get camera frame
       if (ENABLE_BOTTLE):
-        capture = camera.CaptureRGBA(zeroCopy=1, timeout=0)
+        capture = camera.CaptureRGBA(zeroCopy=1, timeout=0, random='dd')
       else:
-        capture = camera.CaptureRGBA(zeroCopy=0, timeout=0)
+        capture = camera.CaptureRGBA(zeroCopy=0, timeout=0, random='d')
 
       print(capture)
       img, width, height = capture
