@@ -69,24 +69,34 @@ def object_detections(objects, json):
 def run():
   fps = 0
   while True:
+    print('loop')
     try:
+      print('start')
       start_time = time.time()
 
       # get camera frame
+      print('bottle')
       if (ENABLE_BOTTLE):
+        print('bottle2')
         capture = camera.CaptureRGBA(zeroCopy=1, timeout=0)
       else:
+        print('bottle3')
         capture = camera.CaptureRGBA(zeroCopy=0, timeout=0)
 
       print(capture)
       img, width, height = capture
+
       # detect objects
+      print('detect')
       if (ENABLE_BOTTLE):
+        print('detect1')
         objects = mobilenet.Detect(img, width, height, IMAGE_OVERLAY)
       else:
+        print('detect2')
         objects = mobilenet.Detect(img, width, height, 'none')
 
       # json detections
+      print('logging')
       if (ENABLE_LOGGING):
         json = {}
         json['datetime'] = str(datetime.datetime.now())
@@ -95,11 +105,17 @@ def run():
 
       # serve images
       if (ENABLE_BOTTLE):
+        print('img')
         numpy_img = jetson.utils.cudaToNumpy(img, CAMERA_WIDTH, CAMERA_HEIGHT, 4)
+        print('img2')
         cv2.putText(numpy_img, str(fps) + ' fps', (20, 40), cv2.FONT_HERSHEY_DUPLEX, 1, (209, 80, 0, 255), 3)
+        print('img3')
         with server.lock:
+          print('img4')
           server.outputFrame = numpy_img
+        print('img5')
         fps = round(1.0 / (time.time() - start_time), 2)
+        print('end')
     except:
       print('closing camera, will reopen..')
       camera.Close()
