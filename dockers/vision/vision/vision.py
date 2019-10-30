@@ -74,9 +74,9 @@ def run():
 
       # get camera frame
       if (ENABLE_BOTTLE):
-        img, width, height = camera.CaptureRGBA(zeroCopy=1)
+        img, width, height = camera.CaptureRGBA(zeroCopy=1, timeout=1000)
       else:
-        img, width, height = camera.CaptureRGBA(zeroCopy=0)
+        img, width, height = camera.CaptureRGBA(zeroCopy=0, timeout=1000)
 
       # detect objects
       if (ENABLE_BOTTLE):
