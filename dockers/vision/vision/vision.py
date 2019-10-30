@@ -77,6 +77,7 @@ def run():
     else:
       capture = camera.CaptureRGBA(zeroCopy=0, timeout=0)
 
+    print(capture)
     if (capture is None):
       print('closing camera, will be reopened..')
       camera.Close()
