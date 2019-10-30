@@ -74,9 +74,9 @@ def run():
 
       # get camera frame
       if (ENABLE_BOTTLE):
-        capture = camera.CaptureRGBA(zeroCopy=1, timeout=0, random='dd')
+        capture = camera.CaptureRGBA(zeroCopy=1, timeout=0)
       else:
-        capture = camera.CaptureRGBA(zeroCopy=0, timeout=0, random='d')
+        capture = camera.CaptureRGBA(zeroCopy=0, timeout=0)
 
       print(capture)
       img, width, height = capture
@@ -103,6 +103,7 @@ def run():
     except:
       print('closing camera, will reopen..')
       camera.Close()
+      camera.Open()
 
   camera.Close()
 
