@@ -18,7 +18,7 @@ There's a docker image of this application which can be run on your Jetson Nano 
 docker run --privileged -it bouwe/jetson-nano-vision:latest
 ```
 
-It is possible to run jtop (https://github.com/rbonghi/jetson_stats) in the container if you change the entrypoint to systemd.
+It is possible to run jtop (https://github.com/rbonghi/jetson_stats) in the container if you change the entrypoint to systemd. Note that this overrides the entrypoint and the application will have to be manually started.
 
 ```bash
 docker run --privileged --entrypoint /bin/systemd -it bouwe/jetson-nano-vision:latest
