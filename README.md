@@ -12,7 +12,7 @@ All docker files rely on standard deb/zip/tbz2 files which include all necessary
 ```
 
 ## Run with Docker
-There's a docker image of this application which can be run on your Jetson Nano device. This image has all of the Jetpack components already installed so it will work without NVIDIA JETPACK flashed onto your sd-card, this will come in handy when you would want to deploy this with Balena, as explained later.
+There's a docker image of this application which can be run on your Jetson Nano device. This image has all of the Jetpack components already installed so it will work without NVIDIA JETPACK flashed onto your sd-card, this will come in handy when you would want to deploy this with Balena, as explained later. The object recognition will be available in your browser.
 
 ```bash
 docker run --privileged -it bouwe/jetson-nano-vision:latest
