@@ -24,6 +24,12 @@ It is possible to run jtop (https://github.com/rbonghi/jetson_stats) in the cont
 docker run --privileged --entrypoint /bin/systemd -it bouwe/jetson-nano-vision:latest
 ```
 
+Now go to the IP of your Jetson Nano or go to `127.0.0.1` if you are currently on your device.
+
+```bash
+http://<ip_jetson_nano>:80
+```
+
 ## Environment variables
 It is possible to set environment variables within your Docker environment.
 
