@@ -11,37 +11,37 @@ import time
 import cv2
 
 try:
-    IMAGE_OVERLAY = str(os.environ['IMAGE_OVERLAY'])
+  IMAGE_OVERLAY = str(os.environ['IMAGE_OVERLAY'])
 except KeyError:
-    IMAGE_OVERLAY = "box,labels,conf"
+  IMAGE_OVERLAY = "box,labels,conf"
 try:
-    CAMERA_HEIGHT = int(os.environ['CAMERA_HEIGHT'])
+  CAMERA_HEIGHT = int(os.environ['CAMERA_HEIGHT'])
 except KeyError:
-    CAMERA_HEIGHT = 720
+  CAMERA_HEIGHT = 720
 try:
-    CAMERA_WIDTH = int(os.environ['CAMERA_WIDTH'])
+  CAMERA_WIDTH = int(os.environ['CAMERA_WIDTH'])
 except KeyError:
-    CAMERA_WIDTH = 1280
+  CAMERA_WIDTH = 1280
 try:
-    CAMERA = str(os.environ['CAMERA'])
+  CAMERA = str(os.environ['CAMERA'])
 except KeyError:
-    CAMERA = "/dev/video0"
+  CAMERA = "/dev/video0"
 try:
-    CONFIDENCE_TRESHOLD = float(os.environ['CONFIDENCE_TRESHOLD'])
+  CONFIDENCE_TRESHOLD = float(os.environ['CONFIDENCE_TRESHOLD'])
 except KeyError:
-    CONFIDENCE_TRESHOLD = 0.5
+  CONFIDENCE_TRESHOLD = 0.5
 try:
-    ALPHA_OVERLAY = int(os.environ['ALPHA_OVERLAY'])
+  ALPHA_OVERLAY = int(os.environ['ALPHA_OVERLAY'])
 except KeyError:
-    ALPHA_OVERLAY = 120
+  ALPHA_OVERLAY = 120
 try:
-    ENABLE_BOTTLE = str(os.environ['ENABLE_BOTTLE']).lower() == 'true'
+  ENABLE_BOTTLE = str(os.environ['ENABLE_BOTTLE']).lower() == 'true'
 except KeyError:
-    ENABLE_BOTTLE = True
+  ENABLE_BOTTLE = True
 try:
-    ENABLE_LOGGING = str(os.environ['ENABLE_LOGGING']).lower() == 'true'
+  ENABLE_LOGGING = str(os.environ['ENABLE_LOGGING']).lower() == 'true'
 except KeyError:
-    ENABLE_LOGGING = False
+  ENABLE_LOGGING = False
 
 sys.argv.append('--threshold=' + str(CONFIDENCE_TRESHOLD))
 sys.argv.append('--alpha=' + str(ALPHA_OVERLAY))
