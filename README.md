@@ -77,7 +77,7 @@ To proceed, login to the developer zone https://developer.nvidia.com/. Download 
 * https://developer.download.nvidia.com/devzone/devcenter/mobile/jetpack_l4t/JETPACK_422_b21/P3448-0000/graphsurgeon-tf_5.1.6-1+cuda10.0_arm64.deb
 * https://developer.download.nvidia.com/devzone/devcenter/mobile/jetpack_l4t/JETPACK_422_b21/P3448-0000/uff-converter-tf_5.1.6-1+cuda10.0_arm64.deb
 
-Run move_deb.sh to put all files in the right folders in order for Docker containers do be built. Clone and zip https://github.com/YashasSamaga/opencv/tree/cuda4dnn-csl-low and place this in the opencv folder.
+Run move_deb.sh to put all files in the right folders in order for Docker containers to be built. Clone and zip https://github.com/YashasSamaga/opencv/tree/cuda4dnn-csl-low and place this in the opencv folder.
 
 ```bash
 sh move_debs.sh
