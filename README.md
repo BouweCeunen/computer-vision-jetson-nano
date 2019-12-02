@@ -1,7 +1,7 @@
 # Computer Vision with Jetson Nano - Object Detection
 Object detection with SSD MobileNet v2 COCO model optimized with TensorRT on NVIDIA Jetson Nano built upon Jetson Inference of dusty-nv (https://github.com/dusty-nv/jetson-inference).
 
-[![DockerHub Badge](https://dockeri.co/image/bouwe/jetson-nano-vision)](https://hub.docker.com/r/bouwe/jetson-nano-vision)
+[![DockerHub Badge](https://dockeri.co/image/bouwe/computer-vision-jetson-nano)](https://hub.docker.com/r/bouwe/computer-vision-jetson-nano)
 
 All docker files rely on standard deb/zip/tbz2 files which include all necessary libraries like CUDA, CUDNN, TensorRT etc. It is possible to download these directly from the nvidia developer console. I'm using a Logitech C920 HD Pro webcam attached to my Jetson Nano for doing object detection with. I've used the Jetson Inference of dusty-nv (https://github.com/dusty-nv/jetson-inference) to make this work. The pretrained SSD MobileNet v2 COCO model optimized for TensorRT is used. It will automatically serve the images with Bottle (https://github.com/bottlepy/bottle) on port 80 of your Jetson Nano which can then be viewed by going to the ip of that device. Resolution of the webcam is set to 1024x720. I'd advise to look at NVIDIA DeepStream for more performant detection.
 
@@ -15,7 +15,7 @@ All docker files rely on standard deb/zip/tbz2 files which include all necessary
 There's a docker image of this application which can be run on your Jetson Nano device. This image has all of the Jetpack components already installed so it will work without NVIDIA JETPACK flashed onto your sd-card, this will come in handy when you would want to deploy this with Balena, as explained later. The object recognition will be available in your browser.
 
 ```bash
-docker run --privileged -it bouwe/jetson-nano-vision:latest
+docker run --privileged -it bouwe/computer-vision-jetson-nano:latest
 ```
 
 It is possible to run jtop (https://github.com/rbonghi/jetson_stats) in the container if you change the entrypoint to systemd. Note that this overrides the entrypoint and the application will have to be manually started.
