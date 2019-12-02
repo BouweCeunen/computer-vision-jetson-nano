@@ -1,6 +1,8 @@
 # Computer Vision with Jetson Nano - Object Detection
 Object detection with SSD MobileNet v2 COCO model optimized with TensorRT on NVIDIA Jetson Nano built upon Jetson Inference of dusty-nv (https://github.com/dusty-nv/jetson-inference).
 
+Feel free to read about this with some more details on [Medium](https://medium.com/technology-at-rombit/computer-vision-with-jetson-nano-bccf8e6c6256).
+
 [![DockerHub Badge](https://dockeri.co/image/bouwe/computer-vision-jetson-nano)](https://hub.docker.com/r/bouwe/computer-vision-jetson-nano)
 
 All docker files rely on standard deb/zip/tbz2 files which include all necessary libraries like CUDA, CUDNN, TensorRT etc. It is possible to download these directly from the nvidia developer console. I'm using a Logitech C920 HD Pro webcam attached to my Jetson Nano for doing object detection with. I've used the Jetson Inference of dusty-nv (https://github.com/dusty-nv/jetson-inference) to make this work. The pretrained SSD MobileNet v2 COCO model optimized for TensorRT is used. It will automatically serve the images with Bottle (https://github.com/bottlepy/bottle) on port 80 of your Jetson Nano which can then be viewed by going to the ip of that device. Resolution of the webcam is set to 1024x720. I'd advise to look at NVIDIA DeepStream for more performant detection.
