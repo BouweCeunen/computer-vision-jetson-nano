@@ -1,6 +1,6 @@
 FROM bouwe/jetson-nano-l4t-cuda:latest
 
-ENV CUDNN_VERSION 7.5.0.56
+ENV CUDNN_VERSION=7.5.0.56
 ENV CUDNN_PKG_VERSION=${CUDNN_VERSION}-1
 LABEL com.nvidia.cudnn.version="${CUDNN_VERSION}"
 
