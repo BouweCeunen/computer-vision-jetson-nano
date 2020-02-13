@@ -1,13 +1,10 @@
 FROM bouwe/jetson-nano-l4t-cuda-cudnn-nvinfer-tensorrt:latest
 
-# https://github.com/YashasSamaga/opencv/tree/cuda4dnn-csl-low
-
 WORKDIR /app
 
 ARG OCV_VERSION="4.1.2"
 ENV DEBIAN_FRONTEND noninteractive
 
-COPY cuda4dnn-csl-low.zip .
 COPY cuda_gl_interop.h.patch .
 
 RUN apt-get update && \
@@ -22,14 +19,13 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN unzip cuda4dnn-csl-low.zip && rm cuda4dnn-csl-low.zip && \
-    wget https://github.com/opencv/opencv_contrib/archive/$OCV_VERSION.zip -O opencv_modules.$OCV_VERSION.zip && \
-    unzip opencv_modules.$OCV_VERSION.zip && rm opencv_modules.$OCV_VERSION.zip && \
-    mkdir -p opencv-cuda4dnn-csl-low/build
+RUN wget https://github.com/opencv/opencv/archive/$OCV_VERSION.zip -O opencv-$OCV_VERSION.zip && unzip opencv-$OCV_VERSION.zip && rm opencv-$OCV_VERSION.zip && \
+    wget https://github.com/opencv/opencv_contrib/archive/$OCV_VERSION.zip -O opencv_modules.$OCV_VERSION.zip && unzip opencv_modules.$OCV_VERSION.zip && rm opencv_modules.$OCV_VERSION.zip && \
+    mkdir -p opencv-$OCV_VERSION/build
 
 RUN patch -N /usr/local/cuda/include/cuda_gl_interop.h < cuda_gl_interop.h.patch && \
     rm cuda_gl_interop.h.patch && \
-    cd opencv-cuda4dnn-csl-low/build && \
+    cd opencv-$OCV_VERSION/build && \
     cmake \
         -D OPENCV_GENERATE_PKGCONFIG=ON -D OPENCV_PC_FILE_NAME=opencv.pc -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME -D WITH_CUDA=ON -D WITH_CUDNN=ON -D OPENCV_DNN_CUDA=ON -D CUDA_ARCH_BIN="5.3" \
         -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-$OCV_VERSION/modules -D CUDA_ARCH_PTX="" -D WITH_CUBLAS=ON -D ENABLE_FAST_MATH=ON -D CUDA_FAST_MATH=ON -D ENABLE_NEON=ON -D WITH_GSTREAMER=ON \
@@ -37,7 +33,7 @@ RUN patch -N /usr/local/cuda/include/cuda_gl_interop.h < cuda_gl_interop.h.patch
         -D WITH_GTK=OFF -D WITH_QT=ON -D WITH_OPENGL=ON -D BUILD_DOCS=OFF -D CMAKE_INSTALL_PREFIX=/usr/local .. && \
     make -j8 && make install && \
     cp unix-install/opencv.pc /usr/local/lib/pkgconfig && \
-    rm -rf /app/opencv-cuda4dnn-csl-low && \
+    rm -rf /app/opencv-$OCV_VERSION && \
     rm -rf /app/opencv_contrib-$OCV_VERSION && \
     ldconfig
 
