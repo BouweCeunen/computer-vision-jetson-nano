@@ -62,7 +62,7 @@ It is possible to set aforementioned environment variables, you can also do this
 Now go to the ip of your Jetson Nano. This ip will be visible in the Balena Cloud UI.
 
 ## Building the images yourself
-To proceed, login to the developer zone https://developer.nvidia.com/. Download following files, these are the dependencies and base files for NVIDIA JETPACK 4.2.2 and place them in the 'resources' folder.
+To proceed, login to the developer zone https://developer.nvidia.com/. Download following files, these are the dependencies and base files for NVIDIA JETPACK 4.2.2 and place them in the 'debs' folder.
 * https://developer.download.nvidia.com/devzone/devcenter/mobile/jetpack_l4t/JETPACK_422_b21/P3448-0000/Jetson-210_Linux_R32.2.1_aarch64.tbz2
 * https://developer.download.nvidia.com/devzone/devcenter/mobile/jetpack_l4t/JETPACK_422_b21/cuda-repo-l4t-10-0-local-10.0.326_1.0-1_arm64.deb
 * https://developer.download.nvidia.com/devzone/devcenter/mobile/jetpack_l4t/JETPACK_422_b21/P3448-0000/libcudnn7_7.5.0.56-1+cuda10.0_arm64.deb
